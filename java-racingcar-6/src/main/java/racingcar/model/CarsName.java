@@ -1,27 +1,30 @@
 package racingcar.model;
 
-import java.util.ArrayList;
-import java.util.List;
 import racingcar.Message.ErrorMessage;
 
 public class CarsName {
-    private final String name;
-    private int MAX_LENGTH = 5;
-    // 이름 쉼표로 구분하고 리스트에 넣어야 함. 예외처리 확인 코드 작성필요.
-    private final List<CarsName> carsnameList = new ArrayList<>();
+    private final int MAX_LENGTH = 5;
+    private final String carsname;
 
-    public CarsName(String name) {
-        this.name = name;
+    public CarsName(String carsname) {
+        validate();
+        this.carsname = carsname;
     }
 
-    private void validateLength(String name) {
-        if (name.length() > MAX_LENGTH) {
+
+    public void validate() {
+        validateLength();
+        validateNull();
+    }
+
+    private void validateLength() {
+        if (carsname.length() > MAX_LENGTH) {
             throw new IllegalArgumentException(ErrorMessage.Car_Name_Lenght);
         }
     }
 
-    private void validateNull(String name) {
-        if (name == null || name.isBlank()) {
+    private void validateNull() {
+        if (carsname == null || carsname.isBlank()) {
             throw new IllegalArgumentException(ErrorMessage.Empty_Name);
         }
     }
