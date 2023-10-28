@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import racingcar.model.CarsName;
+import racingcar.model.Count;
 
 class ApplicationTest extends NsTest {
     private static final int MOVING_FORWARD = 4;
@@ -35,18 +36,24 @@ class ApplicationTest extends NsTest {
     }
 
     @Test
-    public void 자동차_객체() {
+    public void 자동차생성() {
         String name = "HB";
         CarsName carname = new CarsName(name);
         assertThat(carname).isNotNull();
     }
 
-
     @ParameterizedTest
     @ValueSource(strings = {"안녕하세요테스트입니다", "", " "})
-    public void 자동차_생성_실패(String name) {
+    public void 자동차생성_실패(String carsname) {
         // then
-        assertThatThrownBy(() -> new CarsName(name)).isInstanceOf(IllegalArgumentException.class);
+        assertThatThrownBy(() -> new CarsName(carsname)).isInstanceOf(IllegalArgumentException.class);
+    }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"횟수입력"})
+    public void 횟수입력_실패(String count) {
+        // then
+        assertThatThrownBy(() -> new Count(count)).isInstanceOf(IllegalArgumentException.class);
     }
 
     @Override
